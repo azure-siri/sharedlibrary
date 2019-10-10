@@ -12,19 +12,14 @@ def call(Map config) {
     String bucketname = 'testbucket-hbo'
 	String jenkinsScriptsDir = '/local/jenkins/jenkins-hbo.git/scripts'
     
-    pipeline {
-        agent any
-	stages {
+	node('master') {
 		stage('Check if file exists in S3') {      
-			steps {
 			fileExists(artifactName, path)
                 
-            }
-          }
         }
     }
 }
-
+    
 def fileExists(artifactName, path){
     withAWS(credentials:'s3credentials') {
 	  def result = s3FindFiles bucket: bucketname, path: path, glob: artifactName
