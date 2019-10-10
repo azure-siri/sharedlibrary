@@ -14,10 +14,10 @@ def call(Map config) {
     
     pipeline {
         agent any
-		    stages {
-			    stage('Check if file exists in S3') {      
-				    steps {
-					fileExists(artifactName, path)
+	stages {
+		stage('Check if file exists in S3') {      
+			steps {
+			fileExists(artifactName, path)
                 
             }
           }
