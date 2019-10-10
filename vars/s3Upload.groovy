@@ -9,7 +9,7 @@ def call(Map config) {
         error 'Missing parameter to pipeline!'
     }
     
-    String bucketname = 'testbucket-hbo'
+   
 	String jenkinsScriptsDir = '/local/jenkins/jenkins-hbo.git/scripts'
     
 	node('master') {
@@ -20,8 +20,9 @@ def call(Map config) {
     }
 }
     
-def fileExists(artifactName, path){
+def fileExists(def artifactName,def path){
     withAWS(credentials:'s3credentials') {
+	   String bucketname = 'testbucket-hbo'
 	  def result = s3FindFiles bucket: bucketname, path: path, glob: artifactName
 	  if (result) {
         println "File exists: " + result[0]                       
